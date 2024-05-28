@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GEt your certi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./site.css">
+    <!-- JS include index.js-->
+    <link rel="text/javascript" href="./index.js"/>
+    <script src="index.js"></script>
+    <script>
+        var make = (async () => {
+            const statusText = document.getElementById("status");
+            const name = document.getElementById("name");
+            console.log(name);1
+            if (name.value === "" || name.value === undefined){
+                statusText.innerHTML = "Please enter your name";
+                return;
+            }   
+            statusText.innerHTML = "Please wait fetching your certificate";
+            const uri = await generatePDF(name.value);
+            console.log(uri);
+            statusText.innerHTML = "Your certificate has been generated <a href="+uri+" download='"+name.value+".pdf'>here</a>";
+        });
+    </script>
+</head> 
+<body>
+    <header> 
+        <img src="./dev.jpg" alt="Event clouser" >
+        <h3> get your certificate for contest particpation</h3>
+        
+       </header>
+   <main>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="Name" required autocapitalize="name" autocomplete="name" aria-label="Name"/>
+            <!-- <label for="event">Event:</label>
+            <input type="text" id="event" name="event" required />
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required /> -->
+            <button type="submit" onclick="make()" >Get Certificate</button>
+
+   </main>
+
+    <script src = "https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://unpkg.com/@pdf-lib/fontkit@0.0.4"></script>
+    <!-- <iframe id="pdf" src="" frameborder="0" ></iframe> -->
+    <p id="status">Please Enter your name</p>
+</body>
+</html>
